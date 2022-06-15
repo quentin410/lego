@@ -5,7 +5,7 @@ import "./App.css";
 
 function App() {
   const [form] = Form.useForm();
-  const onFinish = (values) => {
+  const onFinish = (values: object) => {
     console.log(123, values);
   };
   return (
