@@ -6,15 +6,15 @@ export default defineConfig({
     react(),
     createStyleImportPlugin({
       resolves: [AntdResolve()],
-      libs: [
-        {
-          libraryName: "ant-design",
-          esModule: true,
-          resolveStyle: (name) => {
-            return `ant-design/es/${name}/style/index`;
-          },
-        },
-      ],
+      // libs: [
+      //   {
+      //     libraryName: "antd",
+      //     esModule: true,
+      //     resolveStyle: (name) => {
+      //       return `antd/es/${name}/style/index`;
+      //     },
+      //   },
+      // ],
     }),
   ],
   css: {

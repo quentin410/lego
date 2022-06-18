@@ -1,0 +1,10 @@
+{
+  "extends": ["google", "plugin:prettier/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+      "@typescript-eslint"
+  ],
+  "rules": {
+    "require-jsdoc": "off"
+  }
+}
