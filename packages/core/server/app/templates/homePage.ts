@@ -1,0 +1,34 @@
+export default (params) => {
+  const { stateLib } = params
+  return `
+    import React from 'react';
+    ${stateLib === 'dvaJs' ? `import { connect } from 'dva'` : ''}
+
+    ${
+      stateLib === 'dvaJs'
+        ? `
+    const mapStateToProps = state => {
+      return {
+        titleColor: state.app.titleColor
+      }
+    }`
+        : ''
+    }
+    const App = (props) => {
+
+      const handleChangeTitleColor = ()=> {
+        props.dispatch({
+          type: 'app/changeTitleColor',
+          payload: {
+            titleColor: 'red'
+          }
+        })
+      }
+      
+      return <div className='app-wrapper'>
+        <div className='title' style={props.titleColor} onClick={handleChangeTitleColor}>{props.title}</div>
+      </div>
+    }
+    export default ${stateLib === 'dvaJs' ? 'connect(mapStateToProps)(App)' : 'App'}
+  `
+}

@@ -1,9 +1,9 @@
 // import {useState} from 'react';
 import { Divider, Form, Radio, Button } from 'antd'
+import Cookie from 'js-cookie'
 import { useState } from 'react'
 import axios from 'axios'
 import './App.css'
-import Cookie from 'js-cookie'
 
 const axiosInstance = axios.create({
   baseURL: '/api/',
@@ -32,6 +32,7 @@ function App() {
     cssLint: 'google',
     codeStyle: 'prettier',
     ssr: true,
+    stateLib: 'dvaJs',
   }
   const [form] = Form.useForm()
 
@@ -67,6 +68,13 @@ function App() {
         </Form.Item>
         {formData?.uiFramework !== 'none' && (
           <>
+            <Form.Item label="状态管理库" name="stateLib">
+              <Radio.Group>
+                <Radio.Button value="none">不需要</Radio.Button>
+                <Radio.Button value="dvaJs">dvaJs</Radio.Button>
+                <Radio.Button value="reactRedux">react-redux</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
             <Form.Item label="组件库" name="componentLib">
               <Radio.Group>
                 <Radio.Button value="none">不需要</Radio.Button>

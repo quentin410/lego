@@ -8,6 +8,9 @@ export default class ProjectsController extends Controller {
     const { uiFramework, nodeFramework } = params
     if (uiFramework !== 'none') {
       ctx.helper.generateClientPackageJson(params)
+      ctx.helper.generateDvaModel()
+      ctx.helper.generateHomePage(params)
+      ctx.helper.generateIndex(params)
     }
     if (nodeFramework !== 'none') {
     }
