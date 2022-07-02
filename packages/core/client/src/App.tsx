@@ -33,6 +33,7 @@ function App() {
     codeStyle: 'prettier',
     ssr: true,
     stateLib: 'dvaJs',
+    ts: true,
   }
   const [form] = Form.useForm()
 
@@ -64,6 +65,12 @@ function App() {
             <Radio.Button value="none">不需要</Radio.Button>
             <Radio.Button value="react">React</Radio.Button>
             <Radio.Button value="vue">Vue</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item label="ts" name="ts">
+          <Radio.Group>
+            <Radio.Button value={false}>不需要</Radio.Button>
+            <Radio.Button value={true}>需要</Radio.Button>
           </Radio.Group>
         </Form.Item>
         {formData?.uiFramework !== 'none' && (

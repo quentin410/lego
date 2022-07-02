@@ -6,18 +6,18 @@ import indexFactory from '../templates/index'
 export default {
   generateClientPackageJson(params) {
     const clientPackageJsonStr = clientPackageJsonFactory(params)
-    console.log('clientPackageJsonStr', clientPackageJsonStr)
+    return clientPackageJsonStr
   },
   generateDvaModel() {
     const dvaModelStr = dvaModelFactory()
-    console.log('dvaModelStr', dvaModelStr)
+    return dvaModelStr
   },
   generateHomePage(params) {
     const homePageStr = homePageFactory(params)
-    console.log('homePageStr', homePageStr)
+    return homePageStr
   },
   generateIndex(params) {
     const indexStr = indexFactory(params)
-    console.log('indexStr', indexStr)
+    return indexStr
   },
 }
