@@ -1,5 +1,5 @@
 export default (params) => {
-  const { uiFramework, componentLib, ts, packTool } = params
+  const { uiFramework, componentLib, ts, packTool, clientEslint, clientPrettier, dvaJs } = params
   return `
   {
     "name": "core",
@@ -42,12 +42,17 @@ export default (params) => {
       `
           : ''
       }
-      "eslint": "^8.18.0",
-      "eslint-config-google": "^0.14.0",
-      "eslint-config-prettier": "^8.5.0",
-      "eslint-plugin-prettier": "^4.0.0",
-      "less": "^4.1.3",
-      "prettier": "^2.7.1",
+      ${
+        clientEslint
+          ? `"eslint": "^8.18.0",
+        "eslint-config-google": "^0.14.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "less": "^4.1.3",`
+          : ''
+      }
+      ${dvaJs ? `"dva": "2.4.0,"` : ''}
+      ${clientPrettier ? `"prettier": "^2.7.1"` : ''}
     }
   }
 `

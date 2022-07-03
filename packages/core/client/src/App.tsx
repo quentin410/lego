@@ -12,9 +12,25 @@ const axiosInstance = axios.create({
   },
 })
 interface formData {
-  uiFramework?: string
-  codeLint?: string
-  nodeFramework?: string
+  uiFramework: string
+  componentLib: string
+  nodeFramework: string
+  appType: string
+  router: string
+  dynamicRouter: boolean
+  packTool: string
+  electron: boolean
+  clientEslint: boolean
+  clientEslintStyle: string
+  jsLint: string
+  cssLint: string
+  codeStyle: string
+  ssr: boolean
+  stateLib: string
+  ts: boolean
+  clientDepsAutoInstall: boolean
+  serverDepsAutoInstall: boolean
+  clientPrettier: boolean
 }
 
 function App() {
@@ -27,26 +43,28 @@ function App() {
     dynamicRouter: true,
     packTool: 'webpack',
     electron: false,
-    codeLint: 'eslint',
+    clientEslint: true,
     jsLint: 'google',
     cssLint: 'google',
     codeStyle: 'prettier',
     ssr: true,
     stateLib: 'dvaJs',
     ts: true,
+    clientDepsAutoInstall: true,
+    serverDepsAutoInstall: true,
+    clientEslintStyle: 'google',
+    clientPrettier: true,
   }
   const [form] = Form.useForm()
 
   const formDataInitial: formData = initialValues
   const [formData, setFormData] = useState(formDataInitial)
   const onFinish = async (values: object) => {
-    console.log(11, values)
     const res = await axiosInstance.post(`projects`, values)
     console.log(22, res)
   }
 
   const onValuesChange = (v: formData) => setFormData(v)
-  console.log(1111, formData?.nodeFramework)
 
   return (
     <div className="create-app-form-wrapper">
@@ -121,16 +139,15 @@ function App() {
                 <Radio.Button value="vite">vite</Radio.Button>
               </Radio.Group>
             </Form.Item>
-            <Form.Item label="代码规范" name="codeLint">
+            <Form.Item label="eslint" name="clientEslint">
               <Radio.Group>
-                <Radio.Button value="none">不需要</Radio.Button>
-                <Radio.Button value="eslint">eslint</Radio.Button>
-                <Radio.Button value="tslint">tslint</Radio.Button>
+                <Radio.Button value={false}>不需要</Radio.Button>
+                <Radio.Button value={true}>需要</Radio.Button>
               </Radio.Group>
             </Form.Item>
-            {formData?.codeLint !== 'none' && (
+            {formData?.clientEslint && (
               <>
-                <Form.Item label="JS规范" name="jsLint">
+                <Form.Item label="JS规范" name="clientEslintStyle">
                   <Radio.Group>
                     <Radio.Button value="google">google</Radio.Button>
                     <Radio.Button value="airbnb">airbnb</Radio.Button>
@@ -138,23 +155,23 @@ function App() {
                     <Radio.Button value="ali">ali</Radio.Button>
                   </Radio.Group>
                 </Form.Item>
-                <Form.Item label="CSS规范" name="cssLint">
+                {/* <Form.Item label="CSS规范" name="cssLint">
                   <Radio.Group>
                     <Radio.Button value="google">google</Radio.Button>
                     <Radio.Button value="airbnb">airbnb</Radio.Button>
                     <Radio.Button value="eslint">eslint</Radio.Button>
                     <Radio.Button value="ali">ali</Radio.Button>
                   </Radio.Group>
-                </Form.Item>
-                <Form.Item label="代码风格" name="codeStyle">
+                </Form.Item> */}
+                <Form.Item label="prettier" name="clientPrettier">
                   <Radio.Group>
-                    <Radio.Button value="none">不需要</Radio.Button>
-                    <Radio.Button value="prettier">prettier</Radio.Button>
+                    <Radio.Button value={false}>不需要</Radio.Button>
+                    <Radio.Button value={true}>需要</Radio.Button>
                   </Radio.Group>
                 </Form.Item>
               </>
             )}
-            <Form.Item label="自动安装依赖" name="clientNodeModulesAutoInstall">
+            <Form.Item label="自动安装依赖" name="clientDepsAutoInstall">
               <Radio.Group>
                 <Radio.Button value={false}>否</Radio.Button>
                 <Radio.Button value={true}>是</Radio.Button>
@@ -189,6 +206,12 @@ function App() {
           <Button type="primary" htmlType="submit">
             一键生成
           </Button>
+        </Form.Item>
+        <Form.Item label="自动安装依赖" name="serverDepsAutoInstall">
+          <Radio.Group>
+            <Radio.Button value={false}>否</Radio.Button>
+            <Radio.Button value={true}>是</Radio.Button>
+          </Radio.Group>
         </Form.Item>
       </Form>
     </div>
